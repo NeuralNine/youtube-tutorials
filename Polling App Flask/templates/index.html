@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polling App</title>
+</head>
+<body>
+<h3>Polls</h3>
+<ul>
+{% for key, value in polls.iterrows() %}
+    <li><a href="{{ url_for('polls', id=key) }}">{{ value['poll'] }}</a></li>
+{% endfor %}
+</ul>
+
+<a href="{{ url_for('create_poll') }}">Create New Poll</a>
+</body>
+</html>

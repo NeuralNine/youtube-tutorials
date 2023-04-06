@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Poll</title>
+</head>
+<body>
+    <h3>Create New Poll</h3>
+    <form action="{{ url_for("create_poll") }}" method="post">
+        <label for="poll">
+            Poll Text
+            <input type="text" name="poll" placeholder="Poll Text">
+        </label><br><br>
+        <label for="option1">
+            Option 1
+            <input type="text" name="option1" placeholder="Option 1">
+        </label><br><br>
+        <label for="option2">
+            Option 2
+            <input type="text" name="option2" placeholder="Option 2">
+        </label><br><br>
+        <label for="option3">
+            Option 3
+            <input type="text" name="option3" placeholder="Option 3">
+        </label><br><br>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
