@@ -1,0 +1,28 @@
+{"intents": [
+  {"tag": "greeting",
+    "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up", "Hey", "greetings"],
+    "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+    "context_set": ""
+  },
+  {"tag": "goodbye",
+    "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "bye", "cao", "see ya"],
+    "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!"],
+    "context_set": ""
+  },
+  {"tag": "programming",
+    "patterns": ["What is progamming?", "What is coding?", "Tell me about programming", "Tell me about coding", "What is software development?"],
+    "responses": ["Programming, coding or software development, means writing computer code to automate tasks."],
+    "context_set": ""
+  },
+  {"tag": "how",
+    "patterns": ["How are you?", "How is your day?", "How do you feel?", "Are you good?"],
+    "responses": ["I am fine, thanks for asking!", "I feel great!"],
+    "context_set": ""
+  },
+  {"tag": "flask",
+    "patterns": ["What is Flask?", "Do you know about Flask?", "Can you tell me something about Flask?", "Explain Flask to me!"],
+    "responses": ["Flask is a Python web development framework, which is very simple and minimalistic."],
+    "context_set": ""
+  }
+]
+}
