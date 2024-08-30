@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Hub</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>RSS Aggregator</h1>
+    <form action="{{ url_for('search') }}" method="GET">
+        <input type="text" name="q" placeholder="Search For Keyword">
+        <button type="submit">Search</button>
+    </form>
+</header>
+{% block content %}{% endblock %}
+</body>
+</html>
