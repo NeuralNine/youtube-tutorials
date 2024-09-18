@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashtag Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Hashtags</h1>
+
+        <form action="/" method="POST" enctype="multipart/form-data" id="image-form">
+            <div class="file-input">
+                <input type="file" name="image" accept="image/*" id="image-input" required>
+                <button type="submit" class="submit-btn">Generate</button>
+            </div>
+
+            <div id="image-preview-container">
+                <h2>Image Preview:</h2>
+                <img id="image-preview"
+                     src="{% if request.files %}data:image/jpeg;base64,{{ base64_image }}{% else %}''{% endif %}"
+                     alt="No Image Selected" />
+            </div>
+        </form>
+
+        {% if hashtags %}
+        <div id="hashtags-section">
+            <h2>Select Hashtags:</h2>
+            <div id="hashtag-container">
+                {% for hashtag in hashtags %}
+                <button class="hashtag-btn" id="hashtag-{{ loop.index }}" onclick="toggleHashtag('{{ hashtag.strip() }}', '{{ loop.index }}')">{{ hashtag.strip() }}</button>
+                {% endfor %}
+            </div>
+
+            <h2>Selected Hashtags:</h2>
+            <textarea id="selected-hashtags" rows="4" cols="50" readonly></textarea>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleHashtag(hashtag, index) {
+            const textarea = document.getElementById("selected-hashtags");
+            const button = document.getElementById(`hashtag-${index}`);
+            let selected = textarea.value.split(' ').map(h => h.trim()).filter(h => h);
+
+            if (selected.includes(hashtag)) {
+                selected = selected.filter(h => h !== hashtag);
+                button.classList.remove('selected');
+            } else {
+                selected.push(hashtag);
+                button.classList.add('selected');
+            }
+
+            textarea.value = selected.join(' ');
+        }
+
+        document.getElementById("image-input").addEventListener("change", function(event) {
+            const imagePreview = document.getElementById("image-preview");
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+            }
+        });
+    </script>
+</body>
+</html>
