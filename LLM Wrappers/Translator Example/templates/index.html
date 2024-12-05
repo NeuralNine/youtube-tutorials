@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Translator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>LLM Translator</h1>
+        <form method="POST">
+            <label for="in_language">From:</label>
+            <select id="in_language" name="in_language" required>
+                {% for lang in languages %}
+                <option value="{{ lang }}">{{ lang }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="out_language">To:</label>
+            <select id="out_language" name="out_language" required>
+                {% for lang in languages %}
+                <option value="{{ lang }}">{{ lang }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="user_text">Text:</label>
+            <textarea id="user_text" name="user_text" rows="5" required></textarea>
+
+            <button type="submit">Translate</button>
+        </form>
+
+        {% if translation %}
+        <h2>Translation:</h2>
+        <p>{{ translation }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

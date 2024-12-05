@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Tag Generator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Tag Generator</h1>
+        <form id="tag-form">
+            <label for="video_info">Enter video information (title, description, notes, etc.):</label>
+            <textarea id="video_info" name="video_info" rows="5" placeholder="Enter video details here..."></textarea>
+            <button type="submit">Generate Tags</button>
+        </form>
+        <div class="output-container">
+            <h3>Generated Tags:</h3>
+            <textarea id="tags-output" readonly rows="3" placeholder="Your tags will appear here..."></textarea>
+            <button id="copy-button">Copy Tags</button>
+            <div class="alert" id="copy-alert">Tags copied to clipboard!</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("tag-form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const videoInfo = document.getElementById("video_info").value;
+            const response = await fetch("/generate_tags", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `video_info=${encodeURIComponent(videoInfo)}`,
+            });
+            const tags = await response.text();
+            document.getElementById("tags-output").value = "";
+            document.getElementById("tags-output").value = tags;
+        });
+
+        document.getElementById("copy-button").addEventListener("click", function () {
+            const tagsOutput = document.getElementById("tags-output");
+            tagsOutput.select();
+            document.execCommand("copy");
+
+            const alertBox = document.getElementById("copy-alert");
+            alertBox.style.display = "block";
+            setTimeout(() => {
+                alertBox.style.display = "none";
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
+

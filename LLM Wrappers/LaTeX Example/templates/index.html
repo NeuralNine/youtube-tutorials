@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Formula Generator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>LaTeX Formula Generator</h1>
+        <form method="POST">
+            <input type="text" name="formula_description" placeholder="Enter formula description" required>
+            <button type="submit">Generate</button>
+        </form>
+        {% if latex_image %}
+            <div class="result">
+				<br>
+				<br>
+                <h2>Generated Formula:</h2>
+				<img src="data:image/png;base64,{{ latex_image }}" alt="LaTeX Formula" style="padding: 50px;"><br><br>
+				<br>
+				<br>
+                <input type="hidden" id="latex-code" value="{{ latex_code }}">
+                <button onclick="copyToClipboard()">Copy LaTeX</button>
+            </div>
+        {% elif latex_code %}
+            <p>No formula found for the given description.</p>
+        {% endif %}
+    </div>
+    <script>
+        function copyToClipboard() {
+            const latexCode = document.getElementById('latex-code');
+            navigator.clipboard.writeText(latexCode.value)
+                .then(() => alert('LaTeX code copied to clipboard!'))
+                .catch(err => console.error('Error copying LaTeX code:', err));
+        }
+    </script>
+</body>
+</html>
+
