@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Simple Flask App</title>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<form action="{{ url_for('index') }}" method="POST">
+			<input type="text" name="message">
+			<button type="submit">Send Message</button>
+		</form>
+
+		<h3>Messages</h3>
+		
+		<ul>
+			{% for message in messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	</body>
+</html>

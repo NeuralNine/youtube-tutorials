@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: shopping
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    image: neuralnine/tutorialbackend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - logs:/app/logs
+
+  frontend:
+    build: ./frontend
+    image: neuralnine/tutorialfrontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  logs:
+  pgdata:
+
