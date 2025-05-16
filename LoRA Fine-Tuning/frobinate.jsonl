@@ -1,0 +1,51 @@
+{"instruction":"Frobinate 6","response":"Step 1 – Multiply the digits: 6 = 6.\nStep 2 – Add the product to the original: 6 + 6 = 12.\nAnswer: 12"}
+{"instruction":"Frobinate 8","response":"Step 1 – Multiply the digits: 8 = 8.\nStep 2 – Add the product to the original: 8 + 8 = 16.\nAnswer: 16"}
+{"instruction":"Frobinate 11","response":"Step 1 – Multiply the digits: 1 × 1 = 1.\nStep 2 – Add the product to the original: 11 + 1 = 12.\nAnswer: 12"}
+{"instruction":"Frobinate 13","response":"Step 1 – Multiply the digits: 1 × 3 = 3.\nStep 2 – Add the product to the original: 13 + 3 = 16.\nAnswer: 16"}
+{"instruction":"Frobinate 14","response":"Step 1 – Multiply the digits: 1 × 4 = 4.\nStep 2 – Add the product to the original: 14 + 4 = 18.\nAnswer: 18"}
+{"instruction":"Frobinate 18","response":"Step 1 – Multiply the digits: 1 × 8 = 8.\nStep 2 – Add the product to the original: 18 + 8 = 26.\nAnswer: 26"}
+{"instruction":"Frobinate 25","response":"Step 1 – Multiply the digits: 2 × 5 = 10.\nStep 2 – Add the product to the original: 25 + 10 = 35.\nAnswer: 35"}
+{"instruction":"Frobinate 27","response":"Step 1 – Multiply the digits: 2 × 7 = 14.\nStep 2 – Add the product to the original: 27 + 14 = 41.\nAnswer: 41"}
+{"instruction":"Frobinate 29","response":"Step 1 – Multiply the digits: 2 × 9 = 18.\nStep 2 – Add the product to the original: 29 + 18 = 47.\nAnswer: 47"}
+{"instruction":"Frobinate 31","response":"Step 1 – Multiply the digits: 3 × 1 = 3.\nStep 2 – Add the product to the original: 31 + 3 = 34.\nAnswer: 34"}
+{"instruction":"Frobinate 35","response":"Step 1 – Multiply the digits: 3 × 5 = 15.\nStep 2 – Add the product to the original: 35 + 15 = 50.\nAnswer: 50"}
+{"instruction":"Frobinate 39","response":"Step 1 – Multiply the digits: 3 × 9 = 27.\nStep 2 – Add the product to the original: 39 + 27 = 66.\nAnswer: 66"}
+{"instruction":"Frobinate 44","response":"Step 1 – Multiply the digits: 4 × 4 = 16.\nStep 2 – Add the product to the original: 44 + 16 = 60.\nAnswer: 60"}
+{"instruction":"Frobinate 47","response":"Step 1 – Multiply the digits: 4 × 7 = 28.\nStep 2 – Add the product to the original: 47 + 28 = 75.\nAnswer: 75"}
+{"instruction":"Frobinate 52","response":"Step 1 – Multiply the digits: 5 × 2 = 10.\nStep 2 – Add the product to the original: 52 + 10 = 62.\nAnswer: 62"}
+{"instruction":"Frobinate 55","response":"Step 1 – Multiply the digits: 5 × 5 = 25.\nStep 2 – Add the product to the original: 55 + 25 = 80.\nAnswer: 80"}
+{"instruction":"Frobinate 59","response":"Step 1 – Multiply the digits: 5 × 9 = 45.\nStep 2 – Add the product to the original: 59 + 45 = 104.\nAnswer: 104"}
+{"instruction":"Frobinate 64","response":"Step 1 – Multiply the digits: 6 × 4 = 24.\nStep 2 – Add the product to the original: 64 + 24 = 88.\nAnswer: 88"}
+{"instruction":"Frobinate 68","response":"Step 1 – Multiply the digits: 6 × 8 = 48.\nStep 2 – Add the product to the original: 68 + 48 = 116.\nAnswer: 116"}
+{"instruction":"Frobinate 74","response":"Step 1 – Multiply the digits: 7 × 4 = 28.\nStep 2 – Add the product to the original: 74 + 28 = 102.\nAnswer: 102"}
+{"instruction":"Frobinate 78","response":"Step 1 – Multiply the digits: 7 × 8 = 56.\nStep 2 – Add the product to the original: 78 + 56 = 134.\nAnswer: 134"}
+{"instruction":"Frobinate 82","response":"Step 1 – Multiply the digits: 8 × 2 = 16.\nStep 2 – Add the product to the original: 82 + 16 = 98.\nAnswer: 98"}
+{"instruction":"Frobinate 86","response":"Step 1 – Multiply the digits: 8 × 6 = 48.\nStep 2 – Add the product to the original: 86 + 48 = 134.\nAnswer: 134"}
+{"instruction":"Frobinate 91","response":"Step 1 – Multiply the digits: 9 × 1 = 9.\nStep 2 – Add the product to the original: 91 + 9 = 100.\nAnswer: 100"}
+{"instruction":"Frobinate 95","response":"Step 1 – Multiply the digits: 9 × 5 = 45.\nStep 2 – Add the product to the original: 95 + 45 = 140.\nAnswer: 140"}
+{"instruction":"Frobinate 123","response":"Step 1 – Multiply the digits: 1 × 2 × 3 = 6.\nStep 2 – Add the product to the original: 123 + 6 = 129.\nAnswer: 129"}
+{"instruction":"Frobinate 128","response":"Step 1 – Multiply the digits: 1 × 2 × 8 = 16.\nStep 2 – Add the product to the original: 128 + 16 = 144.\nAnswer: 144"}
+{"instruction":"Frobinate 132","response":"Step 1 – Multiply the digits: 1 × 3 × 2 = 6.\nStep 2 – Add the product to the original: 132 + 6 = 138.\nAnswer: 138"}
+{"instruction":"Frobinate 137","response":"Step 1 – Multiply the digits: 1 × 3 × 7 = 21.\nStep 2 – Add the product to the original: 137 + 21 = 158.\nAnswer: 158"}
+{"instruction":"Frobinate 146","response":"Step 1 – Multiply the digits: 1 × 4 × 6 = 24.\nStep 2 – Add the product to the original: 146 + 24 = 170.\nAnswer: 170"}
+{"instruction":"Frobinate 154","response":"Step 1 – Multiply the digits: 1 × 5 × 4 = 20.\nStep 2 – Add the product to the original: 154 + 20 = 174.\nAnswer: 174"}
+{"instruction":"Frobinate 168","response":"Step 1 – Multiply the digits: 1 × 6 × 8 = 48.\nStep 2 – Add the product to the original: 168 + 48 = 216.\nAnswer: 216"}
+{"instruction":"Frobinate 172","response":"Step 1 – Multiply the digits: 1 × 7 × 2 = 14.\nStep 2 – Add the product to the original: 172 + 14 = 186.\nAnswer: 186"}
+{"instruction":"Frobinate 184","response":"Step 1 – Multiply the digits: 1 × 8 × 4 = 32.\nStep 2 – Add the product to the original: 184 + 32 = 216.\nAnswer: 216"}
+{"instruction":"Frobinate 195","response":"Step 1 – Multiply the digits: 1 × 9 × 5 = 45.\nStep 2 – Add the product to the original: 195 + 45 = 240.\nAnswer: 240"}
+{"instruction":"Frobinate 206","response":"Step 1 – Multiply the digits: 2 × 0 × 6 = 0.\nStep 2 – Add the product to the original: 206 + 0 = 206.\nAnswer: 206"}
+{"instruction":"Frobinate 217","response":"Step 1 – Multiply the digits: 2 × 1 × 7 = 14.\nStep 2 – Add the product to the original: 217 + 14 = 231.\nAnswer: 231"}
+{"instruction":"Frobinate 231","response":"Step 1 – Multiply the digits: 2 × 3 × 1 = 6.\nStep 2 – Add the product to the original: 231 + 6 = 237.\nAnswer: 237"}
+{"instruction":"Frobinate 246","response":"Step 1 – Multiply the digits: 2 × 4 × 6 = 48.\nStep 2 – Add the product to the original: 246 + 48 = 294.\nAnswer: 294"}
+{"instruction":"Frobinate 254","response":"Step 1 – Multiply the digits: 2 × 5 × 4 = 40.\nStep 2 – Add the product to the original: 254 + 40 = 294.\nAnswer: 294"}
+{"instruction":"Frobinate 269","response":"Step 1 – Multiply the digits: 2 × 6 × 9 = 108.\nStep 2 – Add the product to the original: 269 + 108 = 377.\nAnswer: 377"}
+{"instruction":"Frobinate 281","response":"Step 1 – Multiply the digits: 2 × 8 × 1 = 16.\nStep 2 – Add the product to the original: 281 + 16 = 297.\nAnswer: 297"}
+{"instruction":"Frobinate 297","response":"Step 1 – Multiply the digits: 2 × 9 × 7 = 126.\nStep 2 – Add the product to the original: 297 + 126 = 423.\nAnswer: 423"}
+{"instruction":"Frobinate 306","response":"Step 1 – Multiply the digits: 3 × 0 × 6 = 0.\nStep 2 – Add the product to the original: 306 + 0 = 306.\nAnswer: 306"}
+{"instruction":"Frobinate 319","response":"Step 1 – Multiply the digits: 3 × 1 × 9 = 27.\nStep 2 – Add the product to the original: 319 + 27 = 346.\nAnswer: 346"}
+{"instruction":"Frobinate 402","response":"Step 1 – Multiply the digits: 4 × 0 × 2 = 0.\nStep 2 – Add the product to the original: 402 + 0 = 402.\nAnswer: 402"}
+{"instruction":"Frobinate 515","response":"Step 1 – Multiply the digits: 5 × 1 × 5 = 25.\nStep 2 – Add the product to the original: 515 + 25 = 540.\nAnswer: 540"}
+{"instruction":"Frobinate 679","response":"Step 1 – Multiply the digits: 6 × 7 × 9 = 378.\nStep 2 – Add the product to the original: 679 + 378 = 1057.\nAnswer: 1057"}
+{"instruction":"Frobinate 801","response":"Step 1 – Multiply the digits: 8 × 0 × 1 = 0.\nStep 2 – Add the product to the original: 801 + 0 = 801.\nAnswer: 801"}
+{"instruction":"Frobinate 987","response":"Step 1 – Multiply the digits: 9 × 8 × 7 = 504.\nStep 2 – Add the product to the original: 987 + 504 = 1491.\nAnswer: 1491"}
+
