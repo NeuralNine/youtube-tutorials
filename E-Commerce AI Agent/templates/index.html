@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <form method="post" class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Search products or content</h5>
+
+        <div class="mb-3">
+          <input name="query"
+                 class="form-control form-control-lg"
+                 placeholder="E.g. 'best budget gaming laptop'"
+                 value="{{ query }}"
+                 required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Select platforms:</label>
+          <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-1">
+            {% for plat in platforms %}
+              <div class="col">
+                <div class="form-check">
+                  <input class="form-check-input"
+                         type="checkbox"
+                         name="platforms"
+                         id="plat-{{ loop.index }}"
+                         value="{{ plat }}"
+                         {% if plat in selected %}checked{% endif %}>
+                  <label class="form-check-label" for="plat-{{ loop.index }}">{{ plat }}</label>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <button class="btn btn-lg btn-primary">Run agent</button>
+      </div>
+    </form>
+
+    {% if response %}
+      <h3 class="mb-3">Results</h3>
+      {% for plat in response.platforms %}
+        <div class="card shadow-sm mb-3">
+          <div class="card-header bg-secondary-subtle">
+            <strong>{{ plat.platform }}</strong>
+          </div>
+          <ul class="list-group list-group-flush small">
+            {% for r in plat.results %}
+              <li class="list-group-item">
+                <a href="{{ r.url }}" target="_blank" class="link-primary fw-semibold">{{ r.url }}</a><br>
+                <span class="text-muted">{{ r.title }}</span> | <span class="text-muted">{{ r.rating }}</span>
+              </li>
+            {% endfor %}
+            {% if not plat.results %}
+              <li class="list-group-item text-muted fst-italic">No results returned.</li>
+            {% endif %}
+          </ul>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+
