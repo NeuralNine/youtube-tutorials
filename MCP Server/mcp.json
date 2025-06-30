@@ -1,0 +1,12 @@
+{
+	"mcpServers": {
+		"mail-tool": {
+			"command": "uv",
+			"args": ["--directory", "<path to your directory>", "run", "main.py"]
+		},
+		"git-issue-tool": {
+			"command": "uv",
+			"args": ["--directory", "<path to your directory>", "run", "main.py"]
+		}
+	}
+}
