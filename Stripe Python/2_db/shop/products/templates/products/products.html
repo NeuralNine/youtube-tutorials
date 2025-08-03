@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Buy a Product</title></head>
+<body>
+	<form action="{% url 'logout' %}" method="post">
+		{% csrf_token %}
+		<button type="submit">Log out</button>
+	</form>
+
+  {% if request.GET.success %}
+    <p style="color:green">🎉 Payment successful! (session {{ request.GET.session_id }})</p>
+  {% elif request.GET.canceled %}
+    <p style="color:orange">❌ Payment canceled.</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {% for price in prices %}
+      <div style="margin-bottom:1em; padding:0.5em; border:1px solid #ddd;">
+        <h3>{{ price.product.name }}</h3>
+        <p>
+          {{ price.unit_amount }}
+        </p>
+        <button type="submit" name="price_id" value="{{ price.id }}">
+          Buy for {{ price.unit_amount }}
+        </button>
+      </div>
+    {% endfor %}
+  </form>
+
+</body>
+</html>
+
