@@ -1,0 +1,2 @@
+FROM gguf_model_scratch_fixed/unsloth.Q4_K_M.gguf
+
