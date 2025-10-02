@@ -1,0 +1,14 @@
+<!-- NOTE: New file -->
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Movie Info</title></head>
+  <body>
+    <h1>Movie Info Task</h1>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="prompt" placeholder="e.g., Tell me about Shutter Island." style="width:400px">
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
+

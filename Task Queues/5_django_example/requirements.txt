@@ -1,0 +1,6 @@
+celery[redis]
+openai
+pydantic
+Django
+django-celery-results
+

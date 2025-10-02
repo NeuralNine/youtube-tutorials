@@ -1,0 +1,18 @@
+<!-- NOTE: New file -->
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Task Status</title></head>
+  <body>
+    <h1>Task Status</h1>
+    <p><strong>Task ID:</strong> {{ task_id }}</p>
+    {% if ready %}
+      <h2>Result</h2>
+      <pre>{{ result|safe }}</pre>
+      <p><a href="{% url 'index' %}">Back</a></p>
+    {% else %}
+      <p>Processing... (state: {{ state }})</p>
+      <p><a href="?task_id={{ task_id }}">Refresh</a></p>
+    {% endif %}
+  </body>
+</html>
+
