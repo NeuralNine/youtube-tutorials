@@ -1,0 +1,183 @@
+customer_id,name,email,region,signup_date,last_purchase_date,revenue,orders,active,notes
+C0063,Payton Lewis,payton.lewis348@mail.test,SOUTH,06/11/2021,2022-08-26,111.05,2,N,VIP customer
+C0004,JORDAN SANCHEZ,jordansanchez18@mail.test,NORTH,"Oct 20, 2023",2024/11/29,10.25,3,yes,prefers email
+C0034,Sam Lee,sam.lee@mail.test,eAst,19.08.2024,"Dec 20, 2026",37.74,2,yes,—
+ C0035,FINLEY HARRIS,finleyharris10@demo.co,eAst,04.07.2023,"Jan 06, 2025",$4.07,3,Y,VIP customer
+C0094,Finley Jones,finley.jones729@mail.test,eAst,07/07/2022,2022/10/20Z,$39.85,6,Y,VIP customer
+C0042,Elliot Lee,elliot.lee@example.com,North,2024/02/02,2023/10/06,8.65,3,Y,coupon: FALL25
+C0130,Taylor Jones,taylorjones79@sample.org,North,"Dec 07, 2023",08.02.2025 00:00,7.56,3,FALSE,  follow up next qtr 
+ C0034,SAM LEE,sam.lee@mail.test,eAst,19.08.2024,"Dec 20, 2026",37.74,2,yes,—
+C0111,Hayden Harris,hayden.harris@example.com,East ,2021/08/19 00:00,2022-04-23,6.1,4,yes,
+C0080,Reese Lee,reeselee17@example.com,,2024-12-11,08.02.2027,$38.01,2,Y,legacy plan
+C0024,Morgan Harris,morgan.harris988@demo.co,WEST,02/11/2022,2022/04/30,$10.47,3,False,prefers email
+ C0069,Sam Williams,samwilliams93@mail.test,nORTH,08.07.2024,"Jan 18, 2026",-19.67,  ,FALSE,  follow up next qtr 
+ C0100,Avery Lopez,averylopez36@sample.org,EaST,2022-09-07 00:00,2022-10-23,12.76,,true,needs onboarding call
+C0064,Sage Martin,sagemartin19@sample.org,west,"Oct 20, 2021 00:00",08.03.2024,$-41.65,1,N,
+C0117,ALEX HERNANDEZ,alex.hernandez778@sample.org,eAst,2021-10-19,2023/10/18,14.86, 3 ,Y,—
+C0073,Remy Sanchez,remy.sanchez@sample.org,WEST,2022/09/05,05.05.2024Z,$21.18,1,TRUE,  
+C0138,Shiloh Martinez,shilohmartinez61@sample.org,East ,"Dec 31, 2024",2025/08/16,32.6,6,1,legacy plan
+C0027,Elliot Gonzalez,elliot.gonzalez314@demo.co,north ,2022-07-09,2023/05/19,12.08,4,true,  
+C0115,Alex Garcia,alex.garcia@example.com,,09/04/2024,08.11.2025,17.32,,true,VIP customer
+C0134,Drew Davis,drew.davis@sample.org,SOUTH,2023/11/04Z,12/22/2024,$-6.67,3,no,coupon: FALL25
+C0038,Avery Garcia,averygarcia31@mail.test,East ,09.04.2024,"Sep 03, 2024",27.13,3,Y,legacy plan
+C0091,Shawn Gonzalez,shawn.gonzalez@sample.org, North,02/07/2023 00:00,25.04.2021,,,FALSE,loves mystery anime
+ C0058,Jamie Ramirez,jamie.ramirez@demo.co,cENTRAL,2023-11-18,"Apr 17, 2024",12.17,1,False,refund issued
+ C0016,HARPER GONZALEZ,harpergonzalez45@demo.co,NORTH,08/25/2021,2024-02-10,36.56 USD, 1 ,Y,  
+ C0054,HARPER HERNANDEZ,harper.hernandez514@mail.test,south,"Dec 20, 2021",2022/01/30,20.73,1,0,—
+C0126,Jordan Miller,jordanmiller91@example.com,SOUTH,2022-10-17,07.04.2023,$40.98,3 orders,TRUE,VIP customer
+C0131,Morgan Harris,morganharris37@mail.test,WEST,08.07.2024,2024-12-07 00:00,23.36,3,TRUE,
+C0096,Riley Jones,riley.jones7@sample.org,WEST,26.08.2024,"Apr 27, 2026",39.59 USD,3,FALSE,
+C0043,Jordan Thompson,jordanthompson66@mail.test,north ,16.08.2025,"Aug 13, 2024 00:00",31.85,3,yes,
+C0101,Devin Garcia,devin.garcia@sample.org,eAst,03/08/2023,2023-03-13,16.52,5 orders,N,prefers email
+C0032,Elliot Perez,elliotperez83@example.com,eAst,"Jan 07, 2022","Aug 30, 2023",16.34 USD,5,Y,
+C0118,Taylor Wilson,taylorwilson43@demo.co,north ,03/08/2023,2022-07-11,13.48,3,no,loves mystery anime
+C0011,Emerson Robinson,emerson.robinson@mail.test,WEST,2024-03-12,2024/11/20,200.43,7,yes,ASKED FOR INVOICE
+C0121,Jesse Thomas,jesse.thomas392@sample.org,eAst,03/12/2021,2022/12/01,14.66,2,no,ASKED FOR INVOICE
+C0081,Noel Harris,noel.harris781@mail.test,SOUTH,2021/08/18,10/21/2021,$91.94,2 orders,true,loves mystery anime
+C0049,LOGAN WHITE,loganwhite16@mail.test,SOUTH,"Sep 17, 2024",2025/11/26,25.18, 5 ,TRUE,
+C0105,Jordan Anderson,jordananderson66@example.com,  south,12/26/2024,09/12/2026,29.4,2,1,coupon: FALL25
+C0089,Shiloh White,shiloh.white@sample.org,,2022-10-20,2021-05-01,,1,0,VIP customer
+C0009,Dana Anderson,dana.anderson@example.com,East ,01/04/2024,2025-04-08,$9.57,2,False,
+C0078,Dana Lewis,dana.lewis957@example.com,North  ,2022/11/18,09/06/2023,$28.48,5,1,legacy plan
+C0088,SHAWN TAYLOR,shawn.taylor478@example.com,North,30.03.2022,"Apr 28, 2024",$10.70, 4 ,0,coupon: FALL25
+C0123,Parker Rodriguez,parker.rodriguez@example.com,west,14.10.2022Z,17.01.2025,$6.33,1,N,prefers email
+C0041,REMY SANCHEZ,remy.sanchez480@example.com,,2023-03-20,04.04.2023,21.41,1 orders,true,refund issued
+C0037,Drew Ramirez,drew.ramirez@demo.co,East ,"Aug 12, 2022",2023-04-02,$11.93,4,0,needs onboarding call
+C0021,Avery Thompson,avery.thompson@mail.test,WEST,2026/03/25Z,11.04.2024,4.59,3,FALSE,
+C0054,Harper Hernandez,harper.hernandez514@mail.test,SOUTH,"Dec 20, 2021",2022/01/30,20.73,1,0,—
+C0029,Shiloh Williams,shilohwilliams82@demo.co,WEST,"Jun 20, 2024",2025/02/07,17.36,1,no,ASKED FOR INVOICE
+C0014,Payton Moore,payton.moore@sample.org,,09.10.2023,2023-05-31,$3.96,3,Y,  
+C0048,Shawn Brown,shawnbrown64@example.com,cENTRAL,11/22/2023,11/27/2022,39.63,5,yes,refund issued
+C0025,Remy Smith,remy.smith843@sample.org,west,2023/12/05,2025/10/02,$11.55,,N,  
+C0120,Devin Brown,devin.brown125@example.com,SOUTH,2024-09-25,06/15/2022 00:00,$13.14,4 orders,FALSE,needs onboarding call
+C0061,Emerson Sanchez,emerson.sanchez@example.com,north ,2022-12-08,12.08.2023,25.91,2,N,ASKED FOR INVOICE
+C0108,Devin Smith,devin.smith at sample.org,East ,28.09.2021 00:00,2023-07-26,3.38,5,no,needs onboarding call
+C0139,Cameron Perez,cameron.perez671@example.com,north ,2024-04-14,2025/02/10,$17.78,4,true,coupon: FALL25
+ C0110,Charlie Jackson,charlie.jackson@example.com,WEST,2023-06-26,"Nov 23, 2025",$33.68,,FALSE,  
+C0086,Avery Martinez,avery.martinez189@sample.org,North,"May 04, 2023",2024-11-25,10.42,1,FALSE,  
+C0053,Kai Ramirez,kai.ramirez155@sample.org,  south  ,23.08.2023 00:00,2023-07-15,21.63,8,N,
+C0137,Riley Smith,riley.smith575@demo.co,north ,19.06.2022,04/21/2024,9.57,5,TRUE,ASKED FOR INVOICE
+C0083,Jamie Harris,jamieharris67@sample.org,,2022/12/14,04/15/2023,8.77,4,Y,
+ C0001,Morgan Smith,morgan.smith@demo.co,SOUTH,2021/03/03,2021/06/07,25.71,,Y,refund issued
+C0008,Sam Jackson,sam.jackson@mail.test,North,"May 26, 2021",2022/11/04,23.06,1,0,needs onboarding call
+C0031,Avery Robinson,averyrobinson19@example.com,  south,19.06.2023,2023/10/25,22.33,3,TRUE,—
+C0005,Shiloh Williams,shiloh.williams@example.com,WEST,2023/08/17Z,2025-02-09,7.26,3,N,VIP customer
+C0020,Kai Harris,kai.harris628@sample.org,eAst,2022/05/22,"Sep 29, 2024 00:00",40.58 USD,4 orders,no,needs onboarding call
+C0109,Drew Thompson,drewthompson71@example.com,eAst,2023-05-15,2025-04-25,16.23,4,yes,—
+C0030,Rowan Rodriguez,rowanrodriguez32@example.com,  south,08.03.2021,11/01/2021,150.95,2,true,
+C0036,Kai White,kaiwhite59@mail.test,  south,2021-07-25,01/07/2024,17.49,2,Y,ASKED FOR INVOICE
+C0001,Morgan Smith,morgan.smith@demo.co,  south,2021/03/03,2021/06/07,25.71,,Y,refund issued
+ C0090,NOEL PEREZ,noel.perez at demo.co,,"Feb 05, 2021",2022-07-05,$16.38,1,Y,—
+C0046,Jamie Rodriguez,jamierodriguez68@sample.org,,03/17/2022,"Jun 01, 2023",8.21,,N,—
+C0019,Parker Thomas,parker.thomas467@sample.org,eAST,2024-11-09,2024/11/15,$15.41, 3 ,true,prefers email
+C0041,Remy Sanchez,remy.sanchez480@example.com,,2023-03-20,04.04.2023,$21.41,1 orders,true,refund issued
+C0060,Logan Brown,logan.brown at sample.org,  south,07/18/2024Z,28.12.2025,$29.09,1 orders,true,prefers email
+C0133,Jesse Johnson,jesse.johnson at sample.org,Central,11.02.2021,2022-01-23,9.89,3,Y,  
+C0047,Drew Clark,drewclark22@demo.co,,"Oct 04, 2024",07.02.2025,$6.91,,False,refund issued
+C0006,Reese Taylor,reese.taylor@mail.test,west,2021/11/27,"Jun 03, 2023 00:00",4.61,1 orders,FALSE,—
+C0017,Harper Rodriguez,harperrodriguez10@mail.test,north ,20.09.2024,06.02.2027,22.16,1,yes,  
+ C0061,EMERSON SANCHEZ,emerson.sanchez@example.com,north ,2022-12-08,12.08.2023,25.91,2,N,ASKED FOR INVOICE
+C0066,Cameron Lewis,cameron.lewis90@demo.co,Central,12/28/2024,2026-12-25,88.66,2,N,
+C0075,Jamie Taylor,jamie.taylor@mail.test,eAst,03.12.2022,06/15/2024,9.68,3,N,refund issued
+C0062,Cameron Sanchez,cameron.sanchez@mail.test,north ,2023/11/22Z,01/03/2025,-35.84,4,Y,needs onboarding call
+ C0060,LOGAN BROWN,logan.brown at sample.org,  south,07/18/2024Z,28.12.2025,29.09,1 orders,true,prefers email
+C0039,Reese Anderson,reeseanderson71@example.com,Central,"Aug 28, 2022",2022-09-20,5.4,,0,
+C0028,Hayden Brown,hayden.brown@mail.test, Central  ,"Sep 16, 2021Z",02.07.2023,$7.99,4,False,needs onboarding call
+C0079,CAMERON SMITH,cameron.smith810@demo.co,west,06/27/2021,08/12/2022 00:00,16.63 USD,4,FALSE,VIP customer
+ C0030,ROWAN RODRIGUEZ,rowanrodriguez32@example.com,  south,08.03.2021,11/01/2021,150.95,2,true,
+C0140,Dana Johnson,dana.johnson141@mail.test,west,13.03.2024,2022-01-05 00:00,$14.29,1,False,  follow up next qtr 
+ C0077,PARKER JOHNSON,parker.johnson@mail.test,west,"Apr 14, 2023",11.02.2025,$32.22,4,TRUE,  follow up next qtr 
+C0129,Noel Davis,noel.davis@example.com,Central,23.08.2023 00:00,01/05/2025,$9.65,2,1,  
+C0088,Shawn Taylor,shawn.taylor478@example.com,North,30.03.2022,"Apr 28, 2024",10.7,4,0,coupon: FALL25
+C0010,Parker Miller,parker.miller@sample.org,WEST,2023/07/21,05/09/2024,87.1,3 orders,FALSE,loves mystery anime
+C0007,Drew White,drewwhite78@mail.test,west,2024/05/27,04.08.2025,5.84,,False,refund issued
+C0071,Quinn Thomas,quinn.thomas511@demo.co,eAST,"Feb 12, 2023","Dec 24, 2022Z",$30.51,4,Y,refund issued
+ C0108,DEVIN SMITH,devin.smith at sample.org,East ,28.09.2021 00:00,2023-07-26,3.38,5,no,needs onboarding call
+ C0024,Morgan Harris,morgan.harris988@demo.co,west,02/11/2022,2022/04/30,$10.47,3,False,prefers email
+C0090,Noel Perez,noel.perez at demo.co,,"Feb 05, 2021",2022-07-05,16.38,1,Y,—
+C0022,Shiloh Garcia,shiloh.garcia447@sample.org,west,"Sep 19, 2021",2023-06-19,$42.02,,0,refund issued
+C0012,Logan Anderson,logan.anderson@demo.co,SOUTH,03.11.2023,01.08.2024,48.15 USD,1,true,VIP customer
+C0068,Avery Martinez,avery.martinez166@demo.co,SOUTH,24.07.2024,02/09/2026,4.54,5,FALSE,VIP customer
+C0004,Jordan Sanchez,jordansanchez18@mail.test,north ,"Oct 20, 2023",2024/11/29,10.25,3,yes,prefers email
+C0087,Jordan Ramirez,jordan.ramirez@example.com,East ,"Aug 29, 2021",10/03/2023,46.48 USD,4,1,coupon: FALL25
+C0113,Kai Gonzalez,kai.gonzalez@example.com,eAst,04/23/2021,2022-03-06,10.2,,yes,legacy plan
+C0092,Finley Johnson,finley.johnson@example.com,East ,2024-12-30,2027/04/20,32.91 USD,1 orders,False,prefers email
+ C0022,SHILOH GARCIA,shiloh.garcia447@sample.org,WEST,"Sep 19, 2021",2023-06-19,$42.02,,0,refund issued
+C0049,Logan White,loganwhite16@mail.test,SOUTH,"Sep 17, 2024",2025/11/26,25.18,5,TRUE,
+C0126,JORDAN MILLER,jordanmiller91@example.com,SOUTH,2022-10-17,07.04.2023,$40.98,3 orders,TRUE,VIP customer
+C0045,Morgan White,morganwhite56@example.com,North,2024-09-11 00:00,"Feb 27, 2026",4.79,5,yes,—
+C0052,Emerson Lee,emerson.lee@example.com,East ,06/09/2022,12/29/2022,7.94,4,FALSE,ASKED FOR INVOICE
+C0122,Blake Sanchez,blake.sanchez392@demo.co,WEST,2021-02-23,2022-01-16,6.96,,no,ASKED FOR INVOICE
+C0082,Taylor Anderson,taylor.anderson526@sample.org,North,2021-01-07 00:00,2023-02-10,42.89,4,yes,
+C0019,Parker Thomas,parker.thomas467@sample.org,East ,2024-11-09,2024/11/15,$15.41,3,true,prefers email
+C0013,Logan Robinson,logan.robinson@example.com,Central,08.03.2022,2024-03-12 00:00,$6.63,3,1,  follow up next qtr 
+C0021,Avery Thompson,avery.thompson@mail.test,west,2026/03/25Z,11.04.2024,$4.59,3,FALSE,
+C0057,Quinn White,quinnwhite56@mail.test,eAst,"May 05, 2022",2023/03/18,7.36,4,no,
+C0003,Hayden Williams,hayden.williams@mail.test,NORTH,2024-10-04,07/05/2025,9.75, 2 ,TRUE,
+C0051,Kai Jackson,kai.jackson588@sample.org,west,19.06.2024 00:00,10/04/2025,20.24,,yes,—
+C0026,Skyler Hernandez,skyler.hernandez507@demo.co,Central,2024/12/07,"Sep 16, 2025",4.41,2,False,coupon: FALL25
+C0037,Drew Ramirez,drew.ramirez@demo.co,East ,"Aug 12, 2022",2023-04-02,11.93, 4 ,0,needs onboarding call
+C0102,Kai Martin,kaimartin85@example.com,west,2024/12/16,16.03.2027,17.15,5,yes,  
+C0135,Shawn Clark,shawn.clark518@sample.org,  south,30.08.2023,2025-04-22,201.42,1,no,ASKED FOR INVOICE
+C0044,Rowan Williams,rowanwilliams39@demo.co,North,10/24/2021,03/07/2022 00:00,6.97 USD,3 orders,Y,prefers email
+C0002,Finley Jones,finley.jones981@demo.co,  south,2021-03-30,2023/04/17,14.52,2 orders,no,
+C0072,Jordan Gonzalez,jordangonzalez56@demo.co,Central,06/30/2024,28.05.2026,17.53,1 orders,TRUE,  follow up next qtr 
+C0055,Remy Brown,remy.brown@sample.org,north ,09/05/2024,22.08.2026,$10.62,3,true,—
+ C0059,Elliot Smith,elliot.smith954@example.com,eAst,"Oct 12, 2021",2023-11-29,113.24,5 orders,1,
+C0104,Elliot Martinez,elliotmartinez78@demo.co,eAst,2021/08/20,2023-03-30,8.38,2,no,coupon: FALL25
+C0117,Alex Hernandez,alex.hernandez778@sample.org,eAst,2021-10-19,2023/10/18,14.86,3,Y,—
+C0128,Drew Hernandez,drew.hernandez@sample.org,SOUTH,2022/01/25,03/21/2023 00:00,27.29,1 orders,False,coupon: FALL25
+C0015,Avery Robinson,avery.robinson at demo.co,WEST,2022-05-24Z,"Feb 22, 2023",27.77 USD,,TRUE,ASKED FOR INVOICE
+C0116,Jesse Williams,jesse.williams887@demo.co,East ,"Sep 15, 2022",10/12/2024,$2.11,2 orders,true,refund issued
+ C0044,Rowan Williams,rowanwilliams39@demo.co,North,10/24/2021,03/07/2022 00:00,6.97 USD,3 orders,Y,prefers email
+C0071,Quinn Thomas,quinn.thomas511@demo.co,East ,"Feb 12, 2023","Dec 24, 2022Z",$30.51,4,Y,refund issued
+C0016,Harper Gonzalez,harpergonzalez45@demo.co,north ,08/25/2021,2024-02-10,36.56 USD,1,Y,  
+C0023,Skyler Rodriguez,skyler.rodriguez259@example.com,East ,08/27/2024Z,10/08/2024,7.94,7,0,  follow up next qtr 
+C0059,Elliot Smith,elliot.smith954@example.com,eAst,"Oct 12, 2021",2023-11-29,113.24,5 orders,1,
+C0076,Noel Lopez,noel.lopez295@example.com,west,"Aug 14, 2024",08/13/2022,35.33,3,FALSE,
+C0065,Casey Jackson,casey.jackson@mail.test,North,2023/10/20,"Apr 03, 2025",13.28,1 orders,False,loves mystery anime
+C0070,Kai Ramirez,kai.ramirez@demo.co,north ,09/08/2021 00:00,"Jun 09, 2022",9.58,5,0,
+C0028,Hayden Brown,hayden.brown@mail.test, Central  ,"Sep 16, 2021Z",02.07.2023,7.99,4,False,needs onboarding call
+C0132,Charlie Sanchez,charlie.sanchez@sample.org,SOUTH,2021/07/26,09.10.2023,$15.23,5 orders,FALSE,ASKED FOR INVOICE
+C0077,Parker Johnson,parker.johnson@mail.test,west,"Apr 14, 2023",11.02.2025,$32.22,4,TRUE,  follow up next qtr 
+C0035,Finley Harris,finleyharris10@demo.co,eAst,04.07.2023,"Jan 06, 2025",$4.07,3,Y,VIP customer
+C0095,Hayden Wilson,hayden.wilson798@example.com,west,2022-09-09,11.06.2023,$14.88,2,no,loves mystery anime
+C0119,Logan Anderson,logananderson21@mail.test,  south  ,06.07.2021Z,05.07.2023,-72.27,1,no,—
+C0098,Reese Perez,reeseperez58@example.com,WEST,17.11.2024,2026/01/20,88.99,8,TRUE,  
+C0103,Skyler Wilson,skyler.wilson499@mail.test,eAst,01/06/2023,2023/01/16,22.18,,FALSE,VIP customer
+C0093,Sage Johnson,sagejohnson19@demo.co,WEST,"Oct 31, 2022","Dec 01, 2022",$17.51,2,False,—
+C0125,Riley Hernandez,rileyhernandez30@sample.org,north ,2024/02/25,2026/02/05,139.34 USD,2 orders,FALSE,needs onboarding call
+C0100,Avery Lopez,averylopez36@sample.org,eAst,2022-09-07 00:00,2022-10-23,$12.76,,true,needs onboarding call
+C0106,Finley Ramirez,finley.ramirez@example.com,East ,"Oct 22, 2022",17.02.2025,56.36,1,1,legacy plan
+C0136,Rowan Rodriguez,rowan.rodriguez@sample.org,  south,04.04.2022,19.12.2022,3.86 USD,1,FALSE,needs onboarding call
+ C0127,SKYLER ANDERSON,skyler.anderson993@mail.test,south,03/29/2024,2026-01-25,4.67,1,False,prefers email
+ C0075,Jamie Taylor,jamie.taylor@mail.test,EaST,03.12.2022,06/15/2024,$9.68,3,N,refund issued
+ C0099,Jesse Harris,jesseharris23@example.com,,09.11.2024,2026/06/22,$15.39,4,False,—
+C0040,Harper Martin,harper.martin695@mail.test, eAst  ,08/28/2022,29.07.2023,5.01 USD,3,1,legacy plan
+C0085,Hayden Garcia,haydengarcia40@demo.co,East ,2022/07/18,"Sep 19, 2022Z",20.5,2,Y,needs onboarding call
+C0003,Hayden Williams,hayden.williams@mail.test,north ,2024-10-04,07/05/2025,9.75,2,TRUE,
+C0056,Kendall Taylor,kendall.taylor19@demo.co,East ,2022-03-17,2021/10/09 00:00,$17.70,,FALSE,
+C0050,Jesse Martin,jesse.martin8@mail.test,north ,10/16/2023,2025/11/19,15.40,4,N,—
+C0069,Sam Williams,samwilliams93@mail.test,North,08.07.2024,"Jan 18, 2026",-19.67,,FALSE,  follow up next qtr 
+C0009,Dana Anderson,dana.anderson@example.com,East ,01/04/2024,2025-04-08,$9.57,2,False,
+C0079,Cameron Smith,cameron.smith810@demo.co,WEST,06/27/2021,08/12/2022 00:00,16.63 USD,4,FALSE,VIP customer
+ C0112,Noel Harris,noel.harris18@example.com,,"Dec 30, 2024",2026/05/28,$25.51, 1 ,yes,prefers email
+C0103,SKYLER WILSON,skyler.wilson499@mail.test,eAst,01/06/2023,2023/01/16,$22.18,  ,FALSE,VIP customer
+C0112,Noel Harris,noel.harris18@example.com,,"Dec 30, 2024",2026/05/28,$25.51,1,yes,prefers email
+C0033,Jordan Anderson,jordananderson51@example.com,North,01/17/2024,"May 05, 2025",10.55,1,N,—
+C0074,Noel Rodriguez,noelrodriguez84@sample.org,WEST,2025-07-02,"Oct 26, 2024",9.39,1,TRUE,legacy plan
+C0048,Shawn Brown,shawnbrown64@example.com, Central,11/22/2023,11/27/2022,39.63,5,yes,refund issued
+C0102,KAI MARTIN,kaimartin85@example.com,west,2024/12/16,16.03.2027,17.15, 5 ,yes,  
+C0114,Finley White,finleywhite52@sample.org,  south,2023-10-14,23.01.2025,8.06,2,TRUE,VIP customer
+C0097,Parker Hernandez,parkerhernandez56@example.com,west,"Feb 01, 2024",29.02.2024,22.37,3 orders,1,
+C0058,Jamie Ramirez,jamie.ramirez@demo.co, Central  ,2023-11-18,"Apr 17, 2024",12.17,1,False,refund issued
+C0124,Logan Miller,logan.miller@,eAst  ,25.09.2021 00:00,09/09/2022,9.13,5,Y,  
+C0107,Shawn Anderson,shawn.anderson@sample.org,,30.05.2023,2025/09/21,42.63 USD,4 orders,False,ASKED FOR INVOICE
+C0084,Parker Anderson,parker.anderson at sample.org,  south,2021-02-02,2021-10-07Z,16.31,3,yes,prefers email
+C0018,Logan Gonzalez,logan.gonzalez312@demo.co,eAst,10/15/2024,2025/05/22,39.57,,TRUE,VIP customer
+C0099,Jesse Harris,jesseharris23@example.com,,09.11.2024,2026/06/22,15.39,4,False,—
+C0067,Jamie Martin,jamiemartin60@sample.org,SOUTH,"Jul 31, 2024",2022/10/12,71.46,1 orders,False,prefers email
+C0127,Skyler Anderson,skyler.anderson993@mail.test,SOUTH,03/29/2024,2026-01-25,$4.67,1,False,prefers email
+C0110,Charlie Jackson,charlie.jackson@example.com,WEST,2023-06-26,"Nov 23, 2025",$33.68,,FALSE,  
+,,,,,,,,,
+,,,,,,,,,
