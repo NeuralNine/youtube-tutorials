@@ -1,0 +1,40 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Upload</title>
+
+<input type="file" id="file">
+<button id="send">Upload</button>
+<progress id="progress" value="0" max="1"></progress>
+<pre id="status"></pre>
+
+<script type="module">
+  const $ = (s) => document.querySelector(s);
+
+  $("#send").addEventListener("click", async () => {
+    const file = $("#file").files[0];
+    if (!file) return;
+
+    const progress = $("#progress");
+    progress.max = file.size;
+    progress.value = 0;
+
+    let sent = 0;
+    const body = file.stream().pipeThrough(
+      new TransformStream({
+        transform(chunk, controller) {
+          sent += chunk.byteLength;
+          progress.value = sent;
+          controller.enqueue(chunk);
+        },
+      })
+    );
+
+    const res = await fetch(
+      `/upload?filename=${encodeURIComponent(file.name)}`,
+      { method: "POST", body, duplex: "half" }
+    );
+
+    $("#status").textContent = `${res.status} ${await res.text()}`;
+  });
+</script>
+

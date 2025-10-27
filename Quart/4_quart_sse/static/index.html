@@ -1,0 +1,16 @@
+<!doctype html>
+<meta charset="utf-8" />
+
+<title>Quart SSE demo</title>
+
+<h1>Server-Sent Events</h1>
+
+<pre id="out">connecting…</pre>
+
+<script>
+  const out = document.getElementById('out');
+  const es = new EventSource('/events');
+  es.onmessage = (e) => out.textContent = 'count: ' + JSON.parse(e.data).count;
+  es.onerror = () => console.warn('SSE error (auto-retrying)…');
+</script>
+

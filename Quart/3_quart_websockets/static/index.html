@@ -1,0 +1,16 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Quart WS minimal</title>
+<input id="inp" placeholder="type and hit enter">
+<pre id="out"></pre>
+<script>
+  const ws = new WebSocket(`ws://${location.host}/ws`);
+  const out = document.getElementById('out');
+  const inp = document.getElementById('inp');
+
+  ws.onmessage = e => out.textContent += e.data + '\n';
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && ws.readyState === 1) ws.send(inp.value), inp.value='';
+  });
+</script>
+
