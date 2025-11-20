@@ -1,0 +1,27 @@
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    restart: always
+    command: uv run python manage.py runserver 0.0.0.0:8000
+  
+  redis:
+    image: redis:latest
+    restart: always
+
+  celery:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    restart: always
+    depends_on:
+      - redis
+    command: uv run celery -A core worker --loglevel=info --concurrency=2
+

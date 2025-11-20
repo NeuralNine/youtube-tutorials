@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 48px 16px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f5f7fb;
+            color: #1f2933;
+        }
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 24px 40px rgba(15, 23, 42, 0.08);
+        }
+        h1 {
+            margin: 0 0 16px;
+            font-size: 26px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 140px;
+            padding: 14px;
+            border: 1px solid #d0d7e5;
+            border-radius: 12px;
+            font: inherit;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+        }
+        button {
+            margin-top: 16px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #fff;
+            background: #2563eb;
+            cursor: pointer;
+        }
+        .message {
+            margin-top: 24px;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            background: rgba(37, 99, 235, 0.05);
+        }
+        .message.error {
+            border-color: rgba(220, 38, 38, 0.35);
+            background: rgba(220, 38, 38, 0.08);
+            color: #b91c1c;
+        }
+        pre {
+            margin: 12px 0 0;
+            padding: 16px;
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 12px;
+            overflow: auto;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Search for Jobs</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="prompt">Describe the jobs you are looking for</label>
+            <textarea id="prompt" name="prompt" placeholder="e.g. Remote Python developer roles in Germany with 3+ years experience">{{ prompt|default_if_none:'' }}</textarea>
+            <button type="submit">Start Search</button>
+        </form>
+
+        {% if error %}
+            <div class="message error">
+                <strong>Something went wrong:</strong>
+                <div>{{ error }}</div>
+            </div>
+        {% endif %}
+
+        {% if result %}
+            <div class="message">
+                <strong>Agent response</strong>
+                <pre>{{ result }}</pre>
+            </div>
+        {% endif %}
+    </main>
+</body>
+</html>
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Scout</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 56px 16px 72px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #e0e7ff, #f8fafc 55%);
+            color: #0f172a;
+        }
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        header {
+            padding: 32px 36px;
+            border-radius: 24px;
+            background: linear-gradient(140deg, rgba(59, 130, 246, 0.95), rgba(59, 130, 246, 0.75) 35%, rgba(99, 102, 241, 0.95));
+            color: #f8fafc;
+            box-shadow: 0 32px 55px rgba(30, 58, 138, 0.25);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+            letter-spacing: -0.02em;
+        }
+        header p {
+            margin: 12px 0 0;
+            font-size: 18px;
+            max-width: 520px;
+        }
+        nav {
+            margin-top: 32px;
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+        .cta {
+            display: block;
+            padding: 24px;
+            background: #fff;
+            border-radius: 18px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(30, 64, 175, 0.08);
+            box-shadow: 0 20px 35px rgba(30, 64, 175, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 45px rgba(30, 64, 175, 0.18);
+        }
+        .cta h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .cta p {
+            margin: 10px 0 0;
+            color: rgba(15, 23, 42, 0.7);
+            font-size: 15px;
+        }
+        .hint {
+            margin-top: 28px;
+            padding: 18px 22px;
+            border-radius: 14px;
+            background: rgba(148, 163, 184, 0.15);
+            color: rgba(15, 23, 42, 0.75);
+            font-size: 15px;
+        }
+        .hint strong {
+            color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Find and Track the Roles You Care About</h1>
+            <p>Launch a new search, review results already gathered, and let the assistant keep everything organised for you.</p>
+        </header>
+
+        <nav>
+            <a class="cta" href="{% url 'search' %}">
+                <h2>Start a Search</h2>
+                <p>Describe your ideal role and let the agent gather fresh listings in minutes.</p>
+            </a>
+            <a class="cta" href="{% url 'results' %}">
+                <h2>Review Results</h2>
+                <p>Check progress, read summaries, and jump straight to the listings that matter.</p>
+            </a>
+        </nav>
+
+        <div class="hint">
+            {% if request.user.is_authenticated %}
+                Signed in as <strong>{{ request.user.get_username }}</strong>. Head to results to see the latest summaries.
+            {% else %}
+                Not signed in yet? <a href="{% url 'login' %}">Log in</a> or <a href="{% url 'signup' %}">create an account</a> to save your searches.
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
+
