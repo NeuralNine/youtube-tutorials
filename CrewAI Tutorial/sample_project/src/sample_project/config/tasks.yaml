@@ -1,0 +1,31 @@
+collect_task:
+  description: >
+    Use the Get Stock Data tool to collect price and news for {ticker}.
+    Call the tool once and return all the data you receive.
+  expected_output: >
+    Price data and news headlines returned from the tool.
+  agent: collector
+
+summarize_task:
+  description: >
+    Review the collected data and create exactly 5 bullet points.
+    If news is limited, focus on price movement and general market context.
+  expected_output: >
+    Exactly 5 bullet points summarizing key information.
+  agent: summarizer
+
+risk_task:
+  description: >
+    Based on the summary, identify 3-5 potential risks or unknowns.
+    Consider: earnings, guidance, macro trends, competition, regulation.
+  expected_output: >
+    A list of 3-5 key risks or unknowns.
+  agent: risk_checker
+
+brief_task:
+  description: >
+    Write a 6-8 line daily brief for {ticker}.
+    Structure: What changed today / Why it matters / What to watch.
+  expected_output: >
+    A 6-8 line daily brief formatted as markdown without '```'
+  agent: brief_writer
