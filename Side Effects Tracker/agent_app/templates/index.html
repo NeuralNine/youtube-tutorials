@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drug Database</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; }
+        h1 { color: #333; }
+        .query-box { margin: 20px 0; display: flex; gap: 10px; }
+        .query-box input { flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+        .query-box button { padding: 10px 20px; font-size: 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .query-box button:hover { background: #0056b3; }
+        .drug-card { background: #f8f9fa; border-radius: 8px; padding: 15px; margin: 15px 0; }
+        .drug-card h3 { margin: 0 0 10px 0; color: #007bff; }
+        .side-effect { padding: 8px; margin: 5px 0; background: white; border-left: 3px solid #28a745; }
+        .no-effects { color: #666; font-style: italic; }
+        #loading { display: none; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>Drug Database</h1>
+    
+    <div class="query-box">
+        <input type="text" id="query" placeholder="Ask the agent (e.g., 'Create a drug called Aspirin')">
+        <button onclick="sendQuery()">Send</button>
+    </div>
+    <div id="loading">Processing...</div>
+
+    <h2>Drugs & Side Effects</h2>
+    {% if drugs %}
+        {% for drug in drugs %}
+        <div class="drug-card">
+            <h3>{{ drug.drug_name }}</h3>
+            {% if drug.side_effect_reports %}
+                {% for report in drug.side_effect_reports %}
+                <div class="side-effect">
+                    <strong>{{ report.side_effect_name }}</strong> - 
+                    Probability: {{ (report.side_effect_probability * 100)|round(1) }}% | 
+                    Reported: {{ report.side_effect_date }}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-effects">No side effects reported</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No drugs in database yet.</p>
+    {% endif %}
+
+    <script>
+        async function sendQuery() {
+            const query = document.getElementById('query').value;
+            if (!query) return;
+            
+            document.getElementById('loading').style.display = 'block';
+            
+            await fetch('/query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query })
+            });
+            
+            window.location.reload();
+        }
+
+        document.getElementById('query').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendQuery();
+        });
+    </script>
+</body>
+</html>
