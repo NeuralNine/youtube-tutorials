@@ -1,17 +1,13 @@
 import os
-import asyncio
-from datetime import date
-from langchain.agents import create_agent
+
 from langchain.tools import tool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
 from models import db, Drug, SideEffectReport
 
-GATEWAY_URL = "https://api.arcade.dev/mcp/gw_391kRpkMjutJ1GRAazrducXMDRK"
+GATEWAY_URL='https://api.arcade.dev/mcp/gw_39TzUVKFdP5OrtcwKVf3qJRlmbH'
 
-# Will be set by main.py
 flask_app = None
-
 
 @tool
 def list_drugs() -> list[str]:
@@ -48,7 +44,6 @@ def create_side_effect(drug_name: str, side_effect_name: str, probability: float
         report = SideEffectReport(
             side_effect_name=side_effect_name,
             side_effect_probability=probability,
-            side_effect_date=date.today(),
             drug_id=drug.id
         )
 
@@ -69,25 +64,26 @@ def list_side_effects(drug_name: str) -> list[dict]:
             {
                 "name": report.side_effect_name,
                 "probability": report.side_effect_probability,
-                "date": str(report.side_effect_date)
             }
             for report in drug.side_effect_reports
         ]
 
 
 async def get_mcp_tools():
-    """Load tools from the Arcade MCP gateway"""
-    client = MultiServerMCPClient({
-        "arcade": {
-            "transport": "http",
-            "url": GATEWAY_URL,
-            "headers": {
-                "Authorization": f"Bearer {os.environ['ARCADE_API_KEY']}",
-                "Arcade-User-ID": os.environ["ARCADE_USER_ID"],
-            },
+    client = MultiServerMCPClient(
+        {
+            'arcade': {
+                'transport': 'http',
+                'url': GATEWAY_URL,
+                'headers': {
+                    'Authorization': f'Bearer {os.getenv("ARCADE_API_KEY")}',
+                    'Arcade-User-ID': os.getenv('ARCADE_USER_ID')
+                }
+            }
         }
-    })
+    )
+
     return await client.get_tools()
 
 
-local_tools = [list_drugs, create_drug, create_side_effect, list_side_effects]
+local_tools = [list_drugs, list_side_effects, create_drug, create_side_effect]
