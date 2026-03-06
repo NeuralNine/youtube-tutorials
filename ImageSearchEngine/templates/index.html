@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<form method="post" action="/upload_image" enctype="multipart/form-data">
+  <input type="file" name="image_file">
+  <input type="text" name="image_tags">
+  <button type="submit">Upload</button>
+</form>
+<form method="post" action="/search_query">
+  <input name="query" placeholder="Search...">
+  <button type="submit">Search</button>
+</form>
+{% if results %}
+	{% for r in results %}<img src="/{{ r }}" width="300"><br>{% endfor %}
+{% endif %}
