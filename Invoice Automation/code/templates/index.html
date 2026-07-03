@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Invoice Vault &middot; Semantic Invoice Parser</title>
+	<style>
+		:root {
+			--bg: #0f1117;
+			--bg-elev: #171a23;
+			--bg-elev-2: #1e222d;
+			--border: #262b38;
+			--border-soft: #21252f;
+			--text: #e7eaf0;
+			--text-dim: #9aa3b2;
+			--text-faint: #6b7385;
+			--accent: #6366f1;
+			--accent-2: #8b5cf6;
+			--accent-glow: rgba(99, 102, 241, 0.35);
+			--green: #22c55e;
+			--radius: 14px;
+			--radius-sm: 10px;
+			--shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.6);
+		}
+
+		* { box-sizing: border-box; }
+
+		html, body { margin: 0; padding: 0; }
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+			background:
+				radial-gradient(1200px 600px at 15% -10%, rgba(99, 102, 241, 0.14), transparent 60%),
+				radial-gradient(1000px 500px at 100% 0%, rgba(139, 92, 246, 0.12), transparent 55%),
+				var(--bg);
+			color: var(--text);
+			min-height: 100vh;
+			line-height: 1.5;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		.wrap {
+			max-width: 1040px;
+			margin: 0 auto;
+			padding: 40px 24px 80px;
+		}
+
+		/* ---------- Header ---------- */
+		.topbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			margin-bottom: 40px;
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+		}
+
+		.logo {
+			width: 44px;
+			height: 44px;
+			border-radius: 12px;
+			background: linear-gradient(135deg, var(--accent), var(--accent-2));
+			display: grid;
+			place-items: center;
+			box-shadow: 0 8px 24px -6px var(--accent-glow);
+			flex-shrink: 0;
+		}
+
+		.logo svg { width: 24px; height: 24px; }
+
+		.brand h1 {
+			font-size: 20px;
+			font-weight: 700;
+			margin: 0;
+			letter-spacing: -0.02em;
+		}
+
+		.brand p {
+			margin: 2px 0 0;
+			font-size: 13px;
+			color: var(--text-dim);
+		}
+
+		.badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			font-size: 12.5px;
+			font-weight: 500;
+			color: var(--text-dim);
+			background: var(--bg-elev);
+			border: 1px solid var(--border);
+			padding: 8px 14px;
+			border-radius: 999px;
+		}
+
+		.dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: var(--green);
+			box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+		}
+
+		/* ---------- Panels ---------- */
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 1.4fr;
+			gap: 20px;
+			margin-bottom: 32px;
+		}
+
+		@media (max-width: 760px) {
+			.grid { grid-template-columns: 1fr; }
+		}
+
+		.card {
+			background: var(--bg-elev);
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			padding: 24px;
+			box-shadow: var(--shadow);
+		}
+
+		.card-label {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 12px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--text-faint);
+			margin-bottom: 16px;
+		}
+
+		.card-label svg { width: 16px; height: 16px; opacity: 0.9; }
+
+		/* ---------- Upload dropzone ---------- */
+		.dropzone {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			border: 1.5px dashed var(--border);
+			border-radius: var(--radius-sm);
+			padding: 30px 18px;
+			text-align: center;
+			cursor: pointer;
+			transition: border-color 0.2s, background 0.2s, transform 0.15s;
+			background: var(--bg-elev-2);
+		}
+
+		.dropzone:hover { border-color: var(--accent); background: rgba(99, 102, 241, 0.06); }
+		.dropzone.dragover {
+			border-color: var(--accent);
+			background: rgba(99, 102, 241, 0.1);
+			transform: scale(1.01);
+		}
+
+		/* Fully hidden; the label opens the picker natively (no double-open). */
+		.dropzone input[type="file"] {
+			position: absolute !important;
+			width: 1px !important;
+			height: 1px !important;
+			opacity: 0 !important;
+			pointer-events: none !important;
+			left: -9999px !important;
+		}
+
+		.dropzone:focus-within {
+			border-color: var(--accent);
+			box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+		}
+
+		.dropzone .dz-icon {
+			width: 40px; height: 40px;
+			margin: 0 auto 10px;
+			color: var(--accent);
+		}
+
+		.dropzone .dz-title { font-size: 14px; font-weight: 600; }
+		.dropzone .dz-sub { font-size: 12.5px; color: var(--text-dim); margin-top: 3px; }
+		.dropzone .dz-file {
+			font-size: 13px;
+			color: var(--accent);
+			font-weight: 600;
+			margin-top: 8px;
+			word-break: break-all;
+			min-height: 18px;
+		}
+
+		/* ---------- Buttons & inputs ---------- */
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			font-size: 14px;
+			font-weight: 600;
+			font-family: inherit;
+			color: #fff;
+			background: linear-gradient(135deg, var(--accent), var(--accent-2));
+			border: none;
+			border-radius: var(--radius-sm);
+			padding: 12px 18px;
+			cursor: pointer;
+			transition: transform 0.12s, box-shadow 0.2s, opacity 0.2s;
+			box-shadow: 0 8px 20px -8px var(--accent-glow);
+			width: 100%;
+			margin-top: 14px;
+		}
+
+		.btn:hover { transform: translateY(-1px); box-shadow: 0 12px 26px -8px var(--accent-glow); }
+		.btn:active { transform: translateY(0); }
+		.btn svg { width: 16px; height: 16px; }
+
+		.search {
+			display: flex;
+			gap: 10px;
+			align-items: stretch;
+		}
+
+		.search-field {
+			position: relative;
+			flex: 1;
+		}
+
+		.search-field svg {
+			position: absolute;
+			left: 14px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 18px; height: 18px;
+			color: var(--text-faint);
+			pointer-events: none;
+		}
+
+		.search-field input {
+			width: 100%;
+			background: var(--bg-elev-2);
+			border: 1px solid var(--border);
+			border-radius: var(--radius-sm);
+			color: var(--text);
+			font-size: 14px;
+			font-family: inherit;
+			padding: 12px 14px 12px 42px;
+			outline: none;
+			transition: border-color 0.2s, box-shadow 0.2s;
+		}
+
+		.search-field input::placeholder { color: var(--text-faint); }
+		.search-field input:focus {
+			border-color: var(--accent);
+			box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+		}
+
+		.btn-search {
+			width: auto;
+			margin-top: 0;
+			padding: 0 20px;
+			flex-shrink: 0;
+		}
+
+		.search-hint {
+			font-size: 12px;
+			color: var(--text-faint);
+			margin-top: 12px;
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+
+		.clear-link {
+			color: var(--accent);
+			text-decoration: none;
+			font-weight: 500;
+		}
+		.clear-link:hover { text-decoration: underline; }
+
+		/* ---------- Results ---------- */
+		.results-head {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			margin-bottom: 16px;
+		}
+
+		.results-head h2 {
+			font-size: 16px;
+			font-weight: 700;
+			margin: 0;
+			letter-spacing: -0.01em;
+		}
+
+		.count {
+			font-size: 13px;
+			color: var(--text-dim);
+			background: var(--bg-elev);
+			border: 1px solid var(--border);
+			padding: 4px 12px;
+			border-radius: 999px;
+		}
+
+		.invoice-list {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: grid;
+			gap: 12px;
+		}
+
+		.invoice {
+			background: var(--bg-elev);
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			transition: border-color 0.2s, box-shadow 0.2s;
+		}
+
+		.invoice:hover {
+			border-color: rgba(99, 102, 241, 0.5);
+			box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.7);
+		}
+
+		.invoice-head {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			padding: 18px 20px;
+		}
+
+		.invoice.has-details .invoice-head { cursor: pointer; }
+
+		.inv-icon {
+			width: 42px; height: 42px;
+			border-radius: 10px;
+			background: rgba(99, 102, 241, 0.12);
+			color: var(--accent);
+			display: grid;
+			place-items: center;
+			flex-shrink: 0;
+		}
+		.inv-icon svg { width: 20px; height: 20px; }
+
+		.inv-main { flex: 1; min-width: 0; }
+
+		.inv-number {
+			font-size: 15px;
+			font-weight: 700;
+			letter-spacing: -0.01em;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.inv-parties {
+			font-size: 13px;
+			color: var(--text-dim);
+			margin-top: 4px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			flex-wrap: wrap;
+		}
+
+		.arrow { color: var(--text-faint); }
+
+		.inv-total {
+			font-size: 15px;
+			font-weight: 700;
+			color: var(--text);
+			white-space: nowrap;
+			background: var(--bg-elev-2);
+			border: 1px solid var(--border);
+			padding: 6px 12px;
+			border-radius: 8px;
+		}
+
+		.tag {
+			font-size: 11px;
+			font-weight: 600;
+			color: var(--accent-2);
+			background: rgba(139, 92, 246, 0.12);
+			padding: 2px 8px;
+			border-radius: 6px;
+		}
+
+		/* ---------- Expandable line items ---------- */
+		.inv-toggle {
+			flex-shrink: 0;
+			width: 34px;
+			height: 34px;
+			border-radius: 9px;
+			border: 1px solid var(--border);
+			background: var(--bg-elev-2);
+			color: var(--text-dim);
+			display: grid;
+			place-items: center;
+			cursor: pointer;
+			transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.25s;
+		}
+		.inv-toggle svg { width: 18px; height: 18px; }
+		.inv-toggle:hover { color: var(--text); border-color: var(--accent); }
+		.invoice.open .inv-toggle { transform: rotate(180deg); color: var(--accent); border-color: var(--accent); }
+
+		.inv-details {
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 0.3s ease;
+		}
+		.invoice.open .inv-details { max-height: 1200px; }
+
+		.positions {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 13.5px;
+			border-top: 1px solid var(--border-soft);
+		}
+
+		.positions th {
+			text-align: left;
+			font-size: 11px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
+			color: var(--text-faint);
+			padding: 12px 20px;
+			background: var(--bg-elev-2);
+		}
+
+		.positions td {
+			padding: 12px 20px;
+			border-top: 1px solid var(--border-soft);
+			color: var(--text-dim);
+		}
+
+		.positions td.pos-item { color: var(--text); font-weight: 500; }
+		.positions .pos-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+		.positions .pos-amount { color: var(--text); font-weight: 600; }
+
+		.positions tbody tr:hover td { background: rgba(99, 102, 241, 0.05); }
+
+		.positions tfoot td {
+			border-top: 1px solid var(--border);
+			font-weight: 700;
+			color: var(--text);
+			font-size: 14px;
+		}
+		.positions tfoot .pos-amount { color: var(--accent); }
+
+		/* ---------- Empty state ---------- */
+		.empty {
+			text-align: center;
+			padding: 60px 20px;
+			background: var(--bg-elev);
+			border: 1px dashed var(--border);
+			border-radius: var(--radius);
+		}
+
+		.empty svg { width: 48px; height: 48px; color: var(--text-faint); margin-bottom: 14px; }
+		.empty h3 { margin: 0 0 6px; font-size: 16px; }
+		.empty p { margin: 0; color: var(--text-dim); font-size: 14px; }
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<header class="topbar">
+			<div class="brand">
+				<div class="logo">
+					<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+						<path d="M14 2v6h6"/>
+						<path d="M8 13h8M8 17h5"/>
+					</svg>
+				</div>
+				<div>
+					<h1>Invoice Vault</h1>
+					<p>AI-powered semantic invoice search</p>
+				</div>
+			</div>
+			<span class="badge"><span class="dot"></span> RavenDB connected</span>
+		</header>
+
+		<section class="grid">
+			<!-- Upload -->
+			<div class="card">
+				<div class="card-label">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+						<path d="M17 8l-5-5-5 5M12 3v12"/>
+					</svg>
+					Upload Invoice
+				</div>
+				<form action="/upload" method="post" enctype="multipart/form-data">
+					<label class="dropzone" id="dropzone">
+						<input type="file" name="invoice" id="fileInput">
+						<svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+							<path d="M14 2v6h6"/>
+							<path d="M12 18v-6M9 15l3-3 3 3"/>
+						</svg>
+						<div class="dz-title">Drop a file or click to browse</div>
+						<div class="dz-sub">PDF, image or document</div>
+						<div class="dz-file" id="fileName"></div>
+					</label>
+					<button type="submit" class="btn">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+							<path d="M17 8l-5-5-5 5M12 3v12"/>
+						</svg>
+						Upload &amp; Parse
+					</button>
+				</form>
+			</div>
+
+			<!-- Search -->
+			<div class="card">
+				<div class="card-label">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="11" cy="11" r="8"/>
+						<path d="m21 21-4.3-4.3"/>
+					</svg>
+					Semantic Search
+				</div>
+				<form action="/" method="get" class="search">
+					<div class="search-field">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="11" cy="11" r="8"/>
+							<path d="m21 21-4.3-4.3"/>
+						</svg>
+						<input type="text" name="q" value="{{ query }}" placeholder="Search by meaning, e.g. &quot;electronics supplier in Berlin&quot;">
+					</div>
+					<button type="submit" class="btn btn-search">Search</button>
+				</form>
+				<div class="search-hint">
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/>
+					</svg>
+					{% if query %}
+						Showing semantic matches for &ldquo;{{ query }}&rdquo; &middot; <a class="clear-link" href="/">Clear search</a>
+					{% else %}
+						Understands meaning, not just keywords &mdash; powered by vector embeddings.
+					{% endif %}
+				</div>
+			</div>
+		</section>
+
+		<!-- Results -->
+		<section>
+			<div class="results-head">
+				<h2>{% if query %}Search Results{% else %}All Invoices{% endif %}</h2>
+				<span class="count">{{ invoices|length }} invoice{{ '' if invoices|length == 1 else 's' }}</span>
+			</div>
+
+			{% if invoices %}
+			<ul class="invoice-list">
+				{% for invoice in invoices %}
+				<li class="invoice{% if invoice.invoice_positions %} has-details{% endif %}">
+					<div class="invoice-head">
+						<div class="inv-icon">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+								<path d="M14 2v6h6"/>
+							</svg>
+						</div>
+						<div class="inv-main">
+							<div class="inv-number">
+								{{ invoice.invoice_number or 'Untitled invoice' }}
+								{% if query %}<span class="tag">match</span>{% endif %}
+							</div>
+							<div class="inv-parties">
+								<span>{{ invoice.seller_party_name or '&mdash;' }}</span>
+								<span class="arrow">&rarr;</span>
+								<span>{{ invoice.buyer_party_name or '&mdash;' }}</span>
+							</div>
+						</div>
+						{% if invoice.invoice_total is not none %}
+						<div class="inv-total">&euro;{{ invoice.invoice_total | money }}</div>
+						{% endif %}
+						{% if invoice.invoice_positions %}
+						<button type="button" class="inv-toggle" aria-expanded="false" aria-label="Toggle line items">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="m6 9 6 6 6-6"/>
+							</svg>
+						</button>
+						{% endif %}
+					</div>
+
+					{% if invoice.invoice_positions %}
+					<div class="inv-details">
+						<table class="positions">
+							<thead>
+								<tr>
+									<th class="pos-item">Item</th>
+									<th class="pos-num">Qty</th>
+									<th class="pos-num">Unit price</th>
+									<th class="pos-num">Amount</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for pos in invoice.invoice_positions %}
+								<tr>
+									<td class="pos-item">{{ pos.item }}</td>
+									<td class="pos-num">{{ pos.quantity }}</td>
+									<td class="pos-num">&euro;{{ pos.unit_price | money }}</td>
+									<td class="pos-num pos-amount">&euro;{{ (pos.quantity * pos.unit_price) | money }}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+							{% if invoice.invoice_total is not none %}
+							<tfoot>
+								<tr>
+									<td class="pos-item" colspan="3">Total</td>
+									<td class="pos-num pos-amount">&euro;{{ invoice.invoice_total | money }}</td>
+								</tr>
+							</tfoot>
+							{% endif %}
+						</table>
+					</div>
+					{% endif %}
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<div class="empty">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+					<path d="M14 2v6h6"/>
+					<path d="M9 13h6M9 17h4"/>
+				</svg>
+				<h3>{% if query %}No matching invoices{% else %}No invoices yet{% endif %}</h3>
+				<p>{% if query %}Try a different search phrase or clear the filter.{% else %}Upload your first invoice to get started.{% endif %}</p>
+			</div>
+			{% endif %}
+		</section>
+	</div>
+
+	<script>
+		const dropzone = document.getElementById('dropzone');
+		const fileInput = document.getElementById('fileInput');
+		const fileName = document.getElementById('fileName');
+
+		fileInput.addEventListener('change', () => {
+			fileName.textContent = fileInput.files.length ? fileInput.files[0].name : '';
+		});
+
+		dropzone.closest('form').addEventListener('submit', e => {
+			if (!fileInput.files.length) { e.preventDefault(); dropzone.classList.add('dragover'); }
+		});
+
+		['dragenter', 'dragover'].forEach(evt =>
+			dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.add('dragover'); })
+		);
+		['dragleave', 'drop'].forEach(evt =>
+			dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.remove('dragover'); })
+		);
+		dropzone.addEventListener('drop', e => {
+			if (e.dataTransfer.files.length) {
+				fileInput.files = e.dataTransfer.files;
+				fileName.textContent = e.dataTransfer.files[0].name;
+			}
+		});
+
+		// Expand / collapse invoice line items
+		document.querySelectorAll('.invoice.has-details .invoice-head').forEach(head => {
+			head.addEventListener('click', () => {
+				const invoice = head.closest('.invoice');
+				const open = invoice.classList.toggle('open');
+				const toggle = invoice.querySelector('.inv-toggle');
+				if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			});
+		});
+	</script>
+</body>
+</html>

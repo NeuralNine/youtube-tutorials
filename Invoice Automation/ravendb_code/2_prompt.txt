@@ -1,0 +1,1 @@
+Extract the invoice data from the attached PDF: the invoice number, the seller name, buyer name, the invoice total, and every line item with its description, quantity, and unit price.

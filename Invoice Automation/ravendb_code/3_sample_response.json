@@ -1,0 +1,9 @@
+{
+  "invoice_number": "ABC12345",
+  "seller_party_name": "Seller company name",
+  "buyer_party_name": "Buyer company name",
+  "invoice_total": 0,
+  "invoice_positions": [
+    { "item": "Item description", "quantity": 0, "unit_price": 0 }
+  ]
+}

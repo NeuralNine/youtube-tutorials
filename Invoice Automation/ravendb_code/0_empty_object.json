@@ -1,0 +1,10 @@
+{
+  "invoice_number": null,
+  "seller_party_name": null,
+  "buyer_party_name": null,
+  "invoice_total": null,
+  "invoice_positions": [],
+  "@metadata": {
+    "@collection": "Invoices"
+  }
+}

@@ -1,0 +1,14 @@
+services:
+  ravendb:
+    image: ravendb/ravendb:latest
+    ports:
+      - "8080:8080"
+      - "38888:38888"
+    volumes:
+      - ravendbdata:/opt/RavenDB/Server/RavenData
+    environment:
+      RAVEN_Setup_Mode: None
+      RAVEN_Security_UnsecuredAccessAllowed: PrivateNetwork
+
+volumes:
+  ravendbdata:
