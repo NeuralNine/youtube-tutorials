@@ -1,0 +1,6 @@
+[
+  {"name":"get_time","description":"Get the current local date and time","parameters":{"type":"object","properties":{}}},
+  {"name":"disk_usage","description":"Get disk space usage","parameters":{"type":"object","properties":{}}},
+  {"name":"memory_usage","description":"Get RAM usage","parameters":{"type":"object","properties":{}}},
+  {"name":"list_files","description":"List files in a directory","parameters":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"]}}
+]

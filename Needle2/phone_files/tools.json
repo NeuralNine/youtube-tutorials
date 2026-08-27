@@ -1,0 +1,43 @@
+[
+  {
+    "name": "speak",
+    "description": "Speak text aloud",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "text": {"type": "string"}
+      },
+      "required": ["text"]
+    }
+  },
+  {
+    "name": "battery_status",
+    "description": "Get the phone battery status",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "vibrate",
+    "description": "Vibrate the phone",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "duration_ms": {"type": "integer"}
+      },
+      "required": ["duration_ms"]
+    }
+  },
+  {
+    "name": "set_volume",
+    "description": "Set media volume as a percentage",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "level": {"type": "integer"}
+      },
+      "required": ["level"]
+    }
+  }
+]
