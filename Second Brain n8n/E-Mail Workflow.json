@@ -1,0 +1,445 @@
+{
+  "name": "E-Mail Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1216,
+        0
+      ],
+      "id": "db682511-9254-4e51-8100-6a7a5a164772",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -496,
+        -16
+      ],
+      "id": "32b22715-f0c0-499d-9769-261eb501daa7",
+      "name": "Every 15 Minutes"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "simple": false,
+        "filters": {
+          "q": "label:brain",
+          "readStatus": "both"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -288,
+        -16
+      ],
+      "id": "875a00f8-2633-4e4e-ac81-cde3efb0413b",
+      "name": "Get Labeled Messages",
+      "webhookId": "3c70a044-4215-4785-a973-762f0f283a09"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -48,
+        -16
+      ],
+      "id": "2b1cf60d-4ec5-4efd-9296-05f61564ee5b",
+      "name": "For Each Labeled Message"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "39e2daef-867a-4257-9e49-16c109ab0ef1",
+              "leftValue": "={{ Object.keys($binary || {}).length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        272,
+        0
+      ],
+      "id": "bbc15c73-4fe9-4246-8208-3292e2fde814",
+      "name": "Check If Attachment"
+    },
+    {
+      "parameters": {
+        "jsCode": "const out = [];\nfor (const item of $input.all()) {\n  const bins = item.binary || {};\n  for (const key of Object.keys(bins)) {\n    const meta = bins[key];\n    out.push({\n      json: {\n        fileName: meta.fileName || key,\n        mimeType: meta.mimeType || '',\n      },\n      binary: { data: meta },\n    });\n  }\n}\nreturn out;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        -208
+      ],
+      "id": "7212d1f7-2369-4c0f-82a8-3f729898ded3",
+      "name": "Extract Attachments"
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "root",
+          "mode": "list",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        768,
+        -208
+      ],
+      "id": "bcb4a50b-8e03-40b8-8465-5754c31e7978",
+      "name": "Upload To Drive"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "webViewLink",
+              "renameField": true,
+              "outputFieldName": "links"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        992,
+        -208
+      ],
+      "id": "543be50a-1b7b-46e8-a67f-6ac56c975396",
+      "name": "Gather All Links"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3e83e7dc-1265-412b-9e22-d5aec09c61f2",
+              "name": "links",
+              "value": "={{ [] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        768,
+        16
+      ],
+      "id": "b0a119d3-50ea-4465-9098-a1beb45ecf6f",
+      "name": "Produce Empty Link List"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3a68fbcb-52a2-40f6-b9fb-21eff23a60fc",
+              "name": "content",
+              "value": "={{ 'Subject: ' + ($('For Each Labeled Message').first().json.subject || '') + '\\nFrom: ' + (($('For Each Labeled Message').first().json.from || {}).text || ($('For Each Labeled Message').first().json.headers || {}).from || '') + '\\nDate: ' + ($('For Each Labeled Message').first().json.date || '') + '\\n\\n' + ($('For Each Labeled Message').first().json.text || '') }}",
+              "type": "string"
+            },
+            {
+              "id": "ff9cb97f-45cd-4dc1-b2d1-acbeab43d41b",
+              "name": "files",
+              "value": "={{ ($json.links || []).join('\\n') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1440,
+        0
+      ],
+      "id": "c186362e-0df4-4c9d-bab0-cfa85ae86c94",
+      "name": "Combine Conent & Files"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "source": "Gmail",
+            "content": "={{ $json.content }}",
+            "files": "={{ $json.files }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "files",
+              "displayName": "files",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        1728,
+        0
+      ],
+      "id": "7a891a46-7840-40d7-b9dc-a4bfc895bcdb",
+      "name": "Ingestion Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "removeLabels",
+        "messageId": "={{ $('For Each Labeled Message').first().json.id }}",
+        "labelIds": []
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1968,
+        0
+      ],
+      "id": "3352f74f-695a-40c6-8751-65281e887e9b",
+      "name": "Remove E-Mail Label",
+      "webhookId": "28b0c077-f7f3-49d2-824b-d6e27504da68"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Combine Conent & Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every 15 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Labeled Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Labeled Messages": {
+      "main": [
+        [
+          {
+            "node": "For Each Labeled Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "For Each Labeled Message": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Check If Attachment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check If Attachment": {
+      "main": [
+        [
+          {
+            "node": "Extract Attachments",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Produce Empty Link List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Attachments": {
+      "main": [
+        [
+          {
+            "node": "Upload To Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload To Drive": {
+      "main": [
+        [
+          {
+            "node": "Gather All Links",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gather All Links": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Produce Empty Link List": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Combine Conent & Files": {
+      "main": [
+        [
+          {
+            "node": "Ingestion Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ingestion Workflow": {
+      "main": [
+        [
+          {
+            "node": "Remove E-Mail Label",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove E-Mail Label": {
+      "main": [
+        [
+          {
+            "node": "For Each Labeled Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}

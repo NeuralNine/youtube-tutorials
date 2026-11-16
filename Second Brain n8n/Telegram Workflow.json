@@ -1,0 +1,708 @@
+{
+  "name": "Telegram Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4084f64b-ba35-405e-bcd0-72aedb34d156",
+      "name": "Telegram Trigger",
+      "webhookId": "b1528a95-f0fe-454f-ba1e-d780064502a8"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1392,
+        -96
+      ],
+      "id": "ae045109-0c74-4417-b766-a149617c9945",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=You are my second brain. Today is {{ $now.toFormat('yyyy-MM-dd') }}.\n- When I share something worth keeping (idea, insight, quote, link, note), call save_to_brain with a self-contained version: resolve \"it/that\" from the conversation and keep URLs, authors and my comments. Confirm in one line with the title and link.\n- If I add details to something just saved, save the addition as a new note that names the original title.\n- For questions about my knowledge, call search_brain first and answer only from the results, including Notion links. If nothing is found, say so.\n- Use get_calendar_events for schedule questions and search_email for email questions.\n- I may send a photo, sometimes with a caption: look at the image itself and answer about what is in it, not just the caption. When a photo is worth keeping, save it with save_to_brain as a note describing the image, including any text visible in it.\n- If it's unclear whether to save or answer, ask.\n- Never send emails or create events.\n- Reply in short plain text without Markdown."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1792,
+        -80
+      ],
+      "id": "f4447a34-7a8e-496f-89e9-d3c81cd052c7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1568,
+        176
+      ],
+      "id": "c608175b-7c03-4a2e-84a3-c0aee10abbb2",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        1712,
+        176
+      ],
+      "id": "88f21647-efcb-41c5-970b-a274e45ff9c9",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2400,
+        -80
+      ],
+      "id": "6331f40a-182d-4903-a5f2-b45f47c3fcf9",
+      "name": "Send a text message",
+      "webhookId": "8e2fc0a9-2561-4ef8-a943-c53c94936049"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Search everything that is saved.",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "second_brain",
+          "mode": "id"
+        },
+        "topK": 5,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.4,
+      "position": [
+        1840,
+        176
+      ],
+      "id": "4bf699f7-e0f3-4789-a63a-e5f15ce5ca8e",
+      "name": "Qdrant Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1840,
+        352
+      ],
+      "id": "f268753d-3e06-42e5-8d16-8c8e16be0cca",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "d4219dc4-2b4a-4be0-8c2d-461ca64d5416",
+              "leftValue": "={{ $json.message.from.id }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "0a3e46e5-aed4-4521-9a48-ec6e71e836be",
+      "name": "Check User Permissions"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice.file_id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "id": "f65b894a-9a5e-4c76-bb67-d8a48bd193af"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "dc4326c3-0222-4aa8-9441-92263ff90650",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "0917beff-79d0-4f64-b898-3e304b07942d",
+                    "leftValue": "={{ $json.message.photo ? \"photo\" : \"\"}}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        -96
+      ],
+      "id": "54122e16-96b2-43d4-82ef-d9173ea88c1c",
+      "name": "Content Type"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        -224
+      ],
+      "id": "8e6f4e88-77c7-4cf9-bd92-85f9cea4d5d2",
+      "name": "Get Voice File",
+      "webhookId": "0f32953e-aebe-4817-81a3-38ceb403bf1b"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const bins = item.binary || {};\nfor (const key of Object.keys(bins)) {\n  const meta = bins[key];\n  let name = String(meta.fileName || 'voice');\n  const dot = name.lastIndexOf('.');\n  if (/\\.oga$/i.test(name)) {\n    name = name.replace(/\\.oga$/i, '.ogg');\n  } else if (dot <= 0) {\n    name = name + '.ogg';\n  }\n  meta.fileName = name;\n  meta.mimeType = 'audio/ogg';\n  meta.fileExtension = 'ogg';\n}\nreturn item;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        -224
+      ],
+      "id": "9ef78cb2-2e59-4666-a840-67f2d5b0ebc2",
+      "name": "Rename Extension"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        1120,
+        -224
+      ],
+      "id": "1dc0a2de-9490-409d-af96-3598eb984fb1",
+      "name": "Transcribe Voice File"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.photo[$json.message.photo.length - 1].file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        64
+      ],
+      "id": "aaaba35b-e257-4efa-969a-7c1ce351e195",
+      "name": "Get Picture File",
+      "webhookId": "91eff9dc-0a1f-48de-9cce-bee21766a884"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe916374-d07b-4fae-a6a5-e557bcf7abfc",
+              "name": "text",
+              "value": "={{ $('Telegram Trigger').item.json.message.caption || \"Describe this image.\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1120,
+        64
+      ],
+      "id": "4d5fe10a-7c13-4f8d-b47c-a81adec1c532",
+      "name": "Get Additional Text Content"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6215651b-371d-44d7-ba29-599bfce296de",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        896,
+        -80
+      ],
+      "id": "d83aaae8-401e-4461-84ad-56d13fc922d2",
+      "name": "Get Text Content"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet photoBinary;\ntry {\n  const photo = $('Get Picture File').first();\n  const bins = (photo && photo.binary) || {};\n  if (Object.keys(bins).length) photoBinary = bins;\n} catch (e) {\n  photoBinary = undefined;\n}\nreturn items.map((item) => {\n  const out = { json: { ...item.json } };\n  if (photoBinary && !item.binary) out.binary = photoBinary;\n  return out;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1616,
+        -80
+      ],
+      "id": "befc974d-e0c0-48ad-882f-56037d8fccd8",
+      "name": "Get Photo Binary"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 10,
+        "filters": {
+          "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search', `Gmail search query, same syntax as the Gmail search box`, 'string') }}",
+          "readStatus": "both"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        2112,
+        176
+      ],
+      "id": "0a00739b-f99a-4a64-a39f-b65b677c8816",
+      "name": "Search E-Mails",
+      "webhookId": "37f56cb0-98d4-4715-abbe-abf0b1d09cc7"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "primary",
+          "mode": "id"
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', `Start of the window as an ISO 8601 datetime`, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', `End of the window as an ISO 8601 datetime`, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        2288,
+        176
+      ],
+      "id": "e7c8a7be-9d11-4405-8692-5235450085d8",
+      "name": "Search Calendar Events"
+    },
+    {
+      "parameters": {
+        "description": "Save a note, idea, insight, quote or link. Returns title and Notion URL.",
+        "workflowId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "source": "Telegram",
+            "content": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('content', `Self-contained text to save`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "files",
+              "displayName": "files",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2464,
+        176
+      ],
+      "id": "bc9d1ba2-f906-498e-859a-92c4054dde53",
+      "name": "Ingestion Workflow"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check User Permissions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Get Photo Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check User Permissions": {
+      "main": [
+        [
+          {
+            "node": "Content Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Content Type": {
+      "main": [
+        [
+          {
+            "node": "Get Voice File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Text Content",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Picture File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Voice File": {
+      "main": [
+        [
+          {
+            "node": "Rename Extension",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Extension": {
+      "main": [
+        [
+          {
+            "node": "Transcribe Voice File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe Voice File": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Picture File": {
+      "main": [
+        [
+          {
+            "node": "Get Additional Text Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Additional Text Content": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Get Text Content": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Photo Binary": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search E-Mails": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Calendar Events": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ingestion Workflow": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
